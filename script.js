@@ -31,6 +31,16 @@ function createProductItemElement({ sku, name, image }) {
 //   return item.querySelector('span.item__sku').innerText;
 // }
 
+const buttonRemoveItems = () => {
+  const li = document.getElementsByClassName('cart__item');
+  for (let i = li.length - 1; i >= 0; i -= 1) {
+    elementCartItems.removeChild(li[i]);
+  }
+  const span = document.getElementsByClassName('total-price')[0];
+  span.innerText = 0;
+  saveCartItems();
+};
+
 const calculateSomaTotalValue = (price, soma) => {
   const span = document.getElementsByClassName('total-price')[0];
   let value;
@@ -82,6 +92,8 @@ const createCart = async (event) => {
 
 window.onload = async () => {
   await createProducts();
+  const button = document.getElementsByClassName('empty-cart')[0];
+  button.addEventListener('click', buttonRemoveItems);
   for (let i = 0; i < buttonAdd.length; i += 1) {
     buttonAdd[i].addEventListener('click', createCart);
   }
