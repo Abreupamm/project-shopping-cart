@@ -1,4 +1,5 @@
-const cartItemsClick = require('./cartItemClickListener');
+const cartItemsClick = require('../script');
+
 const getSavedCartItems = () => {
   const ol = document.getElementsByClassName('cart__items')[0];
   const lista = JSON.parse(localStorage.getItem('cartItems', ol.innerHTML));
