@@ -31,9 +31,23 @@ function createProductItemElement({ sku, name, image }) {
 //   return item.querySelector('span.item__sku').innerText;
 // }
 
+const calculateSomaTotalValue = (price, soma) => {
+  const span = document.getElementsByClassName('total-price')[0];
+  let value;
+  if (soma === true) {
+    value = parseFloat(span.innerText) + price;
+  } else {
+    value = parseFloat(span.innerText) - price;
+  }
+  span.innerText = value;
+  return span.innerText;
+};
+
 function cartItemClickListener(event) {
   const produto = event.target;
   elementCartItems.removeChild(produto);
+  const price = parseFloat(produto.id);
+  calculateSomaTotalValue(price, false);
   return saveCartItems();
 }
 
@@ -41,6 +55,7 @@ function createCartItemElement({ sku, name, salePrice }) {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
+  li.id = salePrice;
   li.addEventListener('click', cartItemClickListener);
   return li;
 }
@@ -61,6 +76,7 @@ const createCart = async (event) => {
   const { id, title, price } = item;
   const create = createCartItemElement({ sku: id, name: title, salePrice: price });
   elementCartItems.appendChild(create);
+  calculateSomaTotalValue(price, true);
   return saveCartItems();
 };
 
