@@ -1,4 +1,3 @@
-
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -21,12 +20,6 @@ function createProductItemElement({ sku, name, image }) {
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
-
-  const buttonAdd = document.getElementsByClassName('item__add');
-
-  for (let i = 0; i < buttonAdd.length; i += 1) {
-    buttonAdd[i].addEventListener('click', createCart);
-  }
   return section;
 }
 
@@ -66,13 +59,12 @@ const createCart = async (event) => {
   return element.appendChild(create);
 }
 
-
 window.onload = async () => {
   await createProducts();
 
-  // const buttonAdd = document.getElementsByClassName('item__add');
+  const buttonAdd = document.getElementsByClassName('item__add');
 
-  // for (let i = 0; i < buttonAdd.length; i += 1) {
-  //   buttonAdd[i].addEventListener('click', createCart);
-  // }
+  for (let i = 0; i < buttonAdd.length; i += 1) {
+    buttonAdd[i].addEventListener('click', createCart);
+  }
 };

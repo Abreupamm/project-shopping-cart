@@ -1,4 +1,4 @@
-const urlItem = (item) => `https://api.mercadolibre.com/items/${item}`
+const urlItem = (item) => `https://api.mercadolibre.com/items/${item}`;
 
 const fetchItem = async (item) => {
   const url = urlItem(item);
