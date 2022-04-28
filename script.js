@@ -71,3 +71,4 @@ window.onload = async () => {
   }
   getSavedCartItems();
 };
+module.exports = cartItemClickListener;

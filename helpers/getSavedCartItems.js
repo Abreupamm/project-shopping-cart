@@ -1,5 +1,5 @@
 const getSavedCartItems = () => {
-  const ol = document.getElementsByClassName("cart__items")[0];
+  const ol = document.getElementsByClassName('cart__items')[0];
   const lista = JSON.parse(localStorage.getItem('cartItems', ol.innerHTML));
   if (lista) {
     ol.innerHTML = lista;
@@ -7,8 +7,8 @@ const getSavedCartItems = () => {
     for (let i = 0; i < li.length; i += 1) {
       li[i].addEventListener('click', cartItemClickListener);
     }
-  };
-}
+  }
+};
 
 if (typeof module !== 'undefined') {
   module.exports = getSavedCartItems;
