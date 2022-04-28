@@ -57,7 +57,7 @@ const createCart = async (event) => {
   const create = createCartItemElement({ sku: id, name: title, salePrice: price });
   const element = document.getElementsByClassName('cart__items')[0];
   return element.appendChild(create);
-}
+};
 
 window.onload = async () => {
   await createProducts();
