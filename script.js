@@ -70,6 +70,10 @@ window.onload = async () => {
     buttonAdd[i].addEventListener('click', createCart);
   }
   getSavedCartItems();
+  const li = document.getElementsByClassName('cart__item');
+  if (li !== undefined) {
+    for (let i = 0; i < li.length; i += 1) {
+      li[i].addEventListener('click', cartItemClickListener);
+    }
+  }
 };
-
-module.exports = { cartItemClickListener };
