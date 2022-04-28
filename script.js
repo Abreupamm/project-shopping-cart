@@ -33,7 +33,8 @@ function createProductItemElement({ sku, name, image }) {
 
 function cartItemClickListener(event) {
   const produto = event.target;
-  return elementCartItems.removeChild(produto);
+  elementCartItems.removeChild(produto);
+  return saveCartItems();
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
@@ -59,7 +60,8 @@ const createCart = async (event) => {
   const item = await fetchItem(sku);
   const { id, title, price } = item;
   const create = createCartItemElement({ sku: id, name: title, salePrice: price });
-  return elementCartItems.appendChild(create);
+  elementCartItems.appendChild(create);
+  return saveCartItems();
 };
 
 window.onload = async () => {
@@ -67,4 +69,5 @@ window.onload = async () => {
   for (let i = 0; i < buttonAdd.length; i += 1) {
     buttonAdd[i].addEventListener('click', createCart);
   }
+  getSavedCartItems();
 };
