@@ -91,6 +91,19 @@ body {
   margin: 40px 0;
 }
 
+.loading {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(234, 234, 233);
+  height: 300px;
+  width: 200px;
+  margin: 10px;
+  box-sizing: border-box;
+  padding-top: 50px;
+  text-align: center;
+  font-size: 25px;
+}
+
 .item {
   display: flex;
   flex-direction: column;

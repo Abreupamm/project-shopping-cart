@@ -72,6 +72,10 @@ function createCartItemElement({ sku, name, salePrice }) {
 
 const createProducts = async () => {
   const fetch = await fetchProducts('computador');
+  const loading = document.getElementsByClassName('loading');
+  for (let i = loading.length - 1; i >= 0; i -= 1) {
+    sectionIntems.removeChild(loading[i]);
+  }
   await fetch.forEach((obj) => {
     const { id, title, thumbnail } = obj;
     const result = createProductItemElement({ sku: id, name: title, image: thumbnail });
