@@ -71,4 +71,6 @@ window.onload = async () => {
   }
   getSavedCartItems();
 };
-module.exports = cartItemClickListener;
+if (typeof module !== 'undefined') {
+  module.exports = cartItemClickListener;
+}
