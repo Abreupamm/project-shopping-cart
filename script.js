@@ -71,7 +71,8 @@ function createCartItemElement({ sku, name, salePrice }) {
 }
 
 const createProducts = async () => {
-  const fetch = await fetchProducts('computador');
+  const { results } = await fetchProducts('computador');
+  const fetch = results;
   const loading = document.getElementsByClassName('loading');
   for (let i = loading.length - 1; i >= 0; i -= 1) {
     sectionIntems.removeChild(loading[i]);

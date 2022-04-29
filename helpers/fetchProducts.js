@@ -4,7 +4,7 @@ const fetchProducts = async (produto) => {
   const url = urlApi(produto);
   const result = await fetch(url);
   const data = await result.json();
-  return data.results;
+  return data;
 };
 
 if (typeof module !== 'undefined') {
