@@ -20,11 +20,12 @@ describe('1 - Teste a função fecthProducts', () => {
     expect(products).toEqual(expected);
   });
 
-  it('Verifica se o retorno da função fetchProducts com o argumento "computador" é uma estrutura de dados igual ao objeto computadorSearch', async () => {
+  it('4 - Verifica se o retorno da função fetchProducts com o argumento "computador" é uma estrutura de dados igual ao objeto computadorSearch', async () => {
     const expected = typeof computadorSearch;
     expect(typeof products).toEqual(expected);
   });
 
-  // it('verifica  se ao chamar a função fetchProducts sem argumento, retorna um erro', async () => {
-  // });
+  it('5 - verifica  se ao chamar a função fetchProducts sem argumento, retorna um erro', async () => {
+    await expect(fetchProducts()).rejects.toThrow('You must provide an url');
+  });
 });
