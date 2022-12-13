@@ -1,6 +1,17 @@
 const buttonAdd = document.getElementsByClassName('item__add');
-const sectionIntems = document.getElementsByClassName('items')[0];
+const sectionIntems = document.getElementById('items');
 const elementCartItems = document.getElementsByClassName('cart__items')[0];
+
+function createCartLoading() {
+  for (let index = 0; index < 25; index++) {
+    const section = document.createElement('section');
+    section.className = 'loading';
+    section.innerText = 'Carregando...';
+    sectionIntems.appendChild(section);
+  }
+}
+
+createCartLoading();
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');

@@ -83,7 +83,7 @@ body {
   color: white;
 }
 
-.items {
+#items {
   display: flex;
   flex-basis: 70%;
   flex-wrap: wrap;
