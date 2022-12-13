@@ -17,7 +17,7 @@ Nesse projeto foi feito um **carrinho de compras** totalmente dinâmico! E o mel
 ---
 
 ### Protótipo do projeto
-
+![Project Gif](./prototipo.gif)
 ---
 
 ## API Shopping Cart
