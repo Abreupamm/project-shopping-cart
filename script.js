@@ -1,8 +1,9 @@
 const buttonAdd = document.getElementsByClassName('item__add');
 const sectionIntems = document.getElementById('items');
-const elementCartItems = document.getElementsByClassName('cart__items')[0];
+const elementCartItems = document.getElementById('cart__items');
+const totalPrice = document.getElementById('total-price');
 
-function createCartLoading() {
+function createCardLoading() {
   for (let index = 0; index < 25; index++) {
     const section = document.createElement('section');
     section.className = 'loading';
@@ -11,7 +12,7 @@ function createCartLoading() {
   }
 }
 
-createCartLoading();
+createCardLoading();
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -38,46 +39,56 @@ function createProductItemElement({ sku, name, image }) {
   return section;
 }
 
-// function getSkuFromProductItem(item) {
-//   return item.querySelector('span.item__sku').innerText;
-// }
-
 const buttonRemoveItems = () => {
   const li = document.getElementsByClassName('cart__item');
   for (let i = li.length - 1; i >= 0; i -= 1) {
     elementCartItems.removeChild(li[i]);
   }
-  const span = document.getElementsByClassName('total-price')[0];
-  span.innerText = 0;
+ 
+  totalPrice.innerText = 0,00;
   saveCartItems();
 };
 
-const calculateSomaTotalValue = (price, soma) => {
-  const span = document.getElementsByClassName('total-price')[0];
+
+const calculateSomaTotalValue = (priceTotal, soma) => {
   let value;
+  const price = parseFloat(totalPrice.innerText);
   if (soma === true) {
-    value = parseFloat(span.innerText) + price;
+    value = price + priceTotal;
   } else {
-    value = parseFloat(span.innerText) - price;
+    value = price - priceTotal;
   }
-  span.innerText = value;
-  return span.innerText;
+  totalPrice.innerText = value.toFixed(2);
 };
 
 function cartItemClickListener(event) {
-  const produto = event.target;
+  const produto = event.target.parentNode;
   elementCartItems.removeChild(produto);
   const price = parseFloat(produto.id);
   calculateSomaTotalValue(price, false);
   return saveCartItems();
 }
 
-function createCartItemElement({ sku, name, salePrice }) {
+function createCartItemElement({ image, name, salePrice }) {
   const li = document.createElement('li');
+  const spanPrice = document.createElement('span');
+  const spanName = document.createElement('span');
+  const img = document.createElement('img');
+  const buttonRemove = document.createElement('button');
+  buttonRemove.addEventListener('click', cartItemClickListener);
+
+  img.src = image;
+  spanName.innerText = name;
+  spanPrice.innerText = `R$ ${salePrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
+  buttonRemove.innerText = 'Remover do carinho';
   li.className = 'cart__item';
-  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
+  li.style.border = 'red 1px solid'
+
+  li.appendChild(img);
+  li.appendChild(spanName);
+  li.appendChild(spanPrice);
+  li.appendChild(buttonRemove);
   li.id = salePrice;
-  li.addEventListener('click', cartItemClickListener);
   return li;
 }
 
@@ -99,8 +110,8 @@ const createCart = async (event) => {
   const produto = event.target.parentElement.children;
   const sku = produto[1].innerText;
   const item = await fetchItem(sku);
-  const { id, title, price } = item;
-  const create = createCartItemElement({ sku: id, name: title, salePrice: price });
+  const {title, price, thumbnail } = item;
+  const create = createCartItemElement({  image: thumbnail, name: title, salePrice: price });
   elementCartItems.appendChild(create);
   calculateSomaTotalValue(price, true);
   return saveCartItems();
