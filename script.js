@@ -28,13 +28,14 @@ function createCustomElement(element, className, innerText) {
   return e;
 }
 
-function createProductItemElement({ sku, name, image }) {
+function createProductItemElement({ sku, name, image, price }) {
   const section = document.createElement('section');
   section.className = 'item';
 
   section.appendChild(createProductImageElement(image));
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
+  section.appendChild(createCustomElement('span', 'price', price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})));
   section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
   return section;
 }
@@ -78,11 +79,12 @@ function createCartItemElement({ image, name, salePrice }) {
   buttonRemove.addEventListener('click', cartItemClickListener);
 
   img.src = image;
+  spanName.className = 'cart__item__name';
   spanName.innerText = name;
-  spanPrice.innerText = `R$ ${salePrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}`;
-  buttonRemove.innerText = 'Remover do carinho';
+  spanPrice.className = 'cart__item__price';
+  spanPrice.innerText = salePrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+  buttonRemove.innerText = 'Remover do carrinho';
   li.className = 'cart__item';
-  li.style.border = 'red 1px solid'
 
   li.appendChild(img);
   li.appendChild(spanName);
@@ -100,8 +102,9 @@ const createProducts = async () => {
     sectionIntems.removeChild(loading[i]);
   }
   await fetch.forEach((obj) => {
-    const { id, title, thumbnail } = obj;
-    const result = createProductItemElement({ sku: id, name: title, image: thumbnail });
+    console.log(obj);
+    const { id, title, thumbnail, price } = obj;
+    const result = createProductItemElement({ sku: id, name: title, image: thumbnail , price});
     sectionIntems.appendChild(result);
   });
 };
